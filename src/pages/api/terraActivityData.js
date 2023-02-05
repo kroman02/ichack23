@@ -22,17 +22,17 @@ export default function getTerraActivityData(req, res) {
 
     let dataToGive = []
     try {
-        // terra
-        // .getBody(data)
-        // .then((response) => {
-        //     if(response.status == "success") {
-        //         console.log(response)
-        //         dataToGive.push(response.data)  
-        //     }
-        //     else {
-        //         console.log(response.status)
-        //     }
-        // })
+        terra
+        .getBody(data)
+        .then((response) => {
+            if(response.status == "success") {
+                console.log(response.data)
+                dataToGive.push(response.data)  
+            }
+            else {
+                console.log(response.status)
+            }
+        })
         data = [
             {
               "BMI": 32.50776400712309,
@@ -53,7 +53,7 @@ export default function getTerraActivityData(req, res) {
               "weight_kg": 59.413957983401794
             },
         ]
-        return res.status(200).json(data)
+        return res.status(200).json(data) // should be dataToGive
 
     } catch (error) {
        return res.status(409).json({message: error.message});
