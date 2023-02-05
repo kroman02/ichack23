@@ -1,8 +1,10 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import jwt from 'jsonwebtoken'
 
-const KEY = 'supersecret'
+const KEY = 'somerandomkeyfornow'
 export default function (req, res) {
+  console.log('in secret')
+  console.log(req)
   const {token} = req.body
 
   const {admin} =  jwt.verify(token, KEY)

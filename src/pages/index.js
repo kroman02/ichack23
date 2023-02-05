@@ -1,10 +1,17 @@
+import { useState } from 'react'
+import jwt from 'jsonwebtoken'
+
+// const inter = Inter({ subsets: ['latin'] })
 import Head from "next/head";
 import Logo from "components/logo";
 import Rectangle from "components/rectangle";
-import { useState } from 'react'
+import { middleware } from './middleware.js'
 
 export default function Home() {
-
+  middleware()
+  
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [message, setMessage] = useState('You are not logged in')
   const [secret, setSecret] = useState('')
 
@@ -13,7 +20,7 @@ export default function Home() {
       <h1>{message}</h1>
       <h1>{secret}</h1>
       <Head>
-        <title>aMeal.io</title>
+      <title>aMeal.io</title>
         <meta
           name="description"
           content="aMeal.io is a the meal prep inspiration app without the bs"
@@ -22,7 +29,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-bcream max-w-screen min-h-screen">
-        <div className="absolute w-full items-center flex flex-col top-[20%] md:top-[10%]">
+      <div className="absolute w-full items-center flex flex-col top-[20%] md:top-[10%]">
           <Logo styleComp="w-32 h-32 text-borange md:w-52 md:h-52" />
           <h1 className="text-bblue font-brand text-center w-full text-[60px] -mt-10 md:text-[80px]">
             aMeal.io
@@ -32,7 +39,29 @@ export default function Home() {
           </h2>
         </div>
         <Rectangle />
-      </main>
+    </main>
     </>
   );
+
+  async function submitForm() {
+
+    const res = await fetch('/api/login', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    }).then((t) => t.json())
+
+    const token = res.token
+    const json = jwt.decode(token)
+  
+    if(json.username) {
+
+
+      await window.localStorage.setItem("token", token);
+    } else {
+      setSecret('Nothing Avaliable')
+    }
+  }
 }
