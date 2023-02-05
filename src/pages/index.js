@@ -1,10 +1,17 @@
 import Head from "next/head";
 import Logo from "components/logo";
 import Rectangle from "components/rectangle";
+import { useState } from 'react'
 
 export default function Home() {
+
+  const [message, setMessage] = useState('You are not logged in')
+  const [secret, setSecret] = useState('')
+
   return (
     <>
+      <h1>{message}</h1>
+      <h1>{secret}</h1>
       <Head>
         <title>aMeal.io</title>
         <meta
