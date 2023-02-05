@@ -21,14 +21,17 @@ export default async function handler(req, res) {
     if (!activityLevel) {activityLevel = "average"}
     const activityMultiplier = activityLevelNumbers[activityLevel]
 
-    const searchTerms = req.body.searchTerms
-    const encodedSearch = encodeURIComponent(searchTerms)
+    let searchTerms = "any"
+    if (req.body.searchTerms) {
+      searchTerms = encodeURIComponent(req.body.searchTerms)
+    }
+
     const meal_type = req.body.meal_type
     let calories = calculateCalories(age, sex, weight, height, activityMultiplier) * 0.33
     if (!calories) {calories = 600}
     const healthConditions = req.body.healthConditions
     const cuisineType = req.body.cuisineType    
-    const recipes = await getRecipes(encodedSearch, meal_type, calories)
+    const recipes = await getRecipes(searchTerms, meal_type, calories)
     res.status(200).json({ recipe: recipes })
   }
 
@@ -42,12 +45,8 @@ if (calories - 50 > 0) {
 }
 const maxCalories = calories + 50
 const rangeCalories = minCalories.toString() + "-" + maxCalories.toString()
-console.log(rangeCalories)
-if (searchTerms) {
-  searchTerms="any"
-}  
 if (!mealType) { 
-    mealType="lunch" }
+    mealType="Breakfast" }
   console.log(`Search Params: ${mealType}, ${rangeCalories}, ${searchTerms}`)
   const reqURL = `https://api.edamam.com/api/recipes/v2?type=public&q=${searchTerms}&app_id=${APP_ID}&app_key=${APP_KEY}&meal_type=${mealType}&calories=${rangeCalories}`
 
@@ -62,7 +61,6 @@ if (!mealType) {
       image: element['recipe']['image']
       })
     })
-    console.log(recipes)
     return recipes
 }
 
