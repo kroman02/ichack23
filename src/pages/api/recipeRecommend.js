@@ -13,10 +13,13 @@ const activityLevelNumbers = {
 
 export default async function handler(req, res) {
     /* data from request body to be confirmed */
-    const age = req.body.age
-    const sex = req.body.sex
-    const weight = Math.random()*100
-    const height = req.body.height_m
+    const userData = ""
+    //let userData = await fetch('./api/terraUserData')
+    //userData = await userData.json()
+    const age = userData.age ? userData.age : 35
+    const sex = userData.gender ? userData.gender : "M"
+    const weight = userData.weight ? userData.weight : 75
+    const height = userData.height ? userData.height : 1.75
     let activityLevel = req.body.activityLevel
     if (!activityLevel) {activityLevel = "average"}
     const activityMultiplier = activityLevelNumbers[activityLevel]
