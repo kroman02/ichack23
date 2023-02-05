@@ -61,7 +61,7 @@ async function submitForm(email, password) {
 
   console.log(email, password)
   console.log(JSON.stringify({ email, password }))
-  const res = await fetch('/api/login', {
+  const res = await fetch('/api/userLogin', {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
@@ -69,6 +69,7 @@ async function submitForm(email, password) {
     body: JSON.stringify({ email, password })
   }).then((t) => t.json())
 
+  
   const token = res.token
   const json = jwt.decode(token)
   if(json.email) {

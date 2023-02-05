@@ -8,8 +8,7 @@ import Rectangle from "components/rectangle";
 import { middleware } from './middleware.js'
 
 export default function Home() {
-  middleware()
-  
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('You are not logged in')
@@ -42,26 +41,4 @@ export default function Home() {
     </main>
     </>
   );
-
-  async function submitForm() {
-
-    const res = await fetch('/api/login', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username, password })
-    }).then((t) => t.json())
-
-    const token = res.token
-    const json = jwt.decode(token)
-  
-    if(json.username) {
-
-
-      await window.localStorage.setItem("token", token);
-    } else {
-      setSecret('Nothing Avaliable')
-    }
-  }
 }

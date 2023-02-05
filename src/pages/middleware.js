@@ -14,7 +14,7 @@ function hasToken() {
 // This function can be marked `async` if using `await` inside
 export function middleware() {
   if (hasToken()) {
-    return window.location = '/api/hello' // location to go to
+    return window.location = '/dashboard' // location to go to
   }
 }
 
