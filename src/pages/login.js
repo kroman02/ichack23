@@ -2,19 +2,25 @@ import Btn from "components/form/btn";
 import Input from "components/form/input";
 import Logo from "components/logo";
 import { useState } from "react";
+import jwt from 'jsonwebtoken'
+import { middleware } from './middleware.js'
 
 export default function login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const changeUsername = (e) => {
-    setUsername(e.target.value);
+  middleware()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const changeEmail = (e) => {
+    setEmail(e.target.value);
   };
   const changePassword = (e) => {
     setPassword(e.target.value);
   };
   const onSubmit = () => {
-    console.log("do something");
+    submitForm(email, password)
   };
+
   return (
     <div className="bg-bblue w-screen min-h-screen flex justify-center">
       <div className="max-w-[500px]">
@@ -28,17 +34,17 @@ export default function login() {
               <Input
                 name="email"
                 title="email"
-                onchange={changeUsername}
-                value={username}
+                value={email}
+                onchange={changeEmail}
               />
             </div>
             <div className="mt-8 mx-5">
               <Input
                 name="password"
                 title="password"
-                onchange={changePassword}
-                type="password"
                 value={password}
+                type="password"
+                onchange={changePassword}
               />
             </div>
             <div className="mt-10">
@@ -50,3 +56,23 @@ export default function login() {
     </div>
   );
 }
+
+async function submitForm(email, password) {
+
+  console.log(email, password)
+  console.log(JSON.stringify({ email, password }))
+  const res = await fetch('/api/login', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, password })
+  }).then((t) => t.json())
+
+  const token = res.token
+  const json = jwt.decode(token)
+  if(json.email) {
+    window.localStorage.setItem("token", token);
+  }
+}
+
