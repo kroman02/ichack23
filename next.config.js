@@ -18,6 +18,7 @@ const nextConfig = {
       },
     ];
   },
-};
+  skipMiddlewareUrlNormalize: false,
+}
 
 module.exports = nextConfig;

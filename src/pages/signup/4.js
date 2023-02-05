@@ -4,8 +4,12 @@ import Steps from "components/form/stepBtn";
 import Logo from "components/logo";
 import Link from "next/link"
 import { useState, useEffect } from "react";
+import { middleware } from '../middleware.js'
+
 
 export default function Four() {
+  middleware()
+
   const [diets, setDiets] = useState(typeof window == 'undefined' ? [] :localStorage.getItem('cuisine') || []);
   const onchange = (e) => {
     let id = e.target.getAttribute("id");
