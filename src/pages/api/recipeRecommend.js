@@ -63,11 +63,11 @@ if (!mealType) {
     const recipes = []
     slicedRecipes.forEach((element, index) => {
       recipes.push({
-      label: element['recipe']['label'],
-      uri: element['recipe']['uri'],
-      image: element['recipe']['image'],
-      ingredients: element['recipe']['ingredients'].length,
-      totalTime: element['recipe']['totalTime']
+      name: element['recipe']['label'],
+      id: element['recipe']['uri'],
+      img: element['recipe']['image'],
+      ingredient_num: element['recipe']['ingredients'].length,
+      time: element['recipe']['totalTime']
       })
     })
     return recipes

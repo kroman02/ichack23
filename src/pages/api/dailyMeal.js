@@ -31,10 +31,10 @@ export default async function handler(req, res) {
     const healthConditions = req.body.healthConditions
     const cuisineType = req.body.cuisineType
     const recipes = []
-    recipes.push({breakfast: await getRecipes(searchTerms, "Breakfast", calories)})
-    recipes.push({lunch: await getRecipes(searchTerms, "Lunch", calories)})
-    recipes.push({dinner: await getRecipes(searchTerms, "Dinner", calories)})
-    recipes.push({snacks: await getRecipes(searchTerms, "Snacks", calories)})
+    recipes.push({meal: "breakfast", meals: [await getRecipes(searchTerms, "Breakfast", calories)]})
+    recipes.push({meal: "lunch", meals : [await getRecipes(searchTerms, "Lunch", calories)]})
+    recipes.push({meal: "dinner", meals: [await getRecipes(searchTerms, "Dinner", calories)]})
+    recipes.push({meal: "snacks", meals: [await getRecipes(searchTerms, "Snacks", calories)]})
 
     res.status(200).json({ recipe: recipes })
   }
@@ -59,11 +59,11 @@ if (!mealType) {
     const recipes = []
     slicedRecipes.forEach((element, index) => {
       recipes.push({
-      label: element['recipe']['label'],
-      uri: element['recipe']['uri'],
-      image: element['recipe']['image'],
-      ingredients: element['recipe']['ingredients'].length,
-      totalTime: element['recipe']['totalTime']
+      name: element['recipe']['label'],
+      id: element['recipe']['uri'],
+      img: element['recipe']['image'],
+      ingredient_num: element['recipe']['ingredients'].length,
+      time: element['recipe']['totalTime']
       })
     })
     return recipes
