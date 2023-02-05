@@ -3,11 +3,11 @@ import Input from "components/form/input";
 import Steps from "components/form/stepBtn";
 import Logo from "components/logo";
 import { useState } from "react";
-// import { middleware } from '../middleware.js'
+import { middleware } from '../middleware.js'
 
 export default function Four() {
 
-  // middleware()
+  middleware()
 
 const [form, setForm] = useState({
   email: "",
