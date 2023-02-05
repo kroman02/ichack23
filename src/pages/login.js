@@ -74,6 +74,7 @@ async function submitForm(email, password) {
   const json = jwt.decode(token)
   if(json.email) {
     window.localStorage.setItem("token", token);
+    return window.location = '/dashboard'
   }
 }
 
