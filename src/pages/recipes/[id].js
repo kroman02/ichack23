@@ -26,7 +26,7 @@ export default function recipe({ props }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps() {
   return {
     props: {}, // will be passed to the page component as props
   };
