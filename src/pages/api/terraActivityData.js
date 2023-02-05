@@ -1,4 +1,5 @@
 import Terra from "terra-api";
+import moment from "moment"
 
 // AUTH BEFORE.  
 // calories_data => get BMR by default.
@@ -9,28 +10,29 @@ export default function getTerraActivityData(req, res) {
     
     // A day will be the ideal timeframe. A whole day, gives accurate readings.
     // These should be supplied by the POST request.
-    const startDate = new Date("2023-02-02T00:00:00.00Z");
-    const endDate = new Date("2023-02-02T00:23:59.59Z");
+    const endDate = "2023-02-05T10:26:02.066314+00:00"
+    const startDate = "2023-02-04T10:56:02.066314+00:00"
 
-    // header https://widget.tryterra.co/session/bd2f4fbb-6917-43c2-8ca4-b8d89ffb6b8a/success?user_id=4bb0f073-cba8-416a-8515-92c7103218b1&resource=FITBIT&reference_id=1&lan=en#_=_
     const data = {
-        userId: "4bb0f073-cba8-416a-8515-92c7103218b1",
-        startDate: startDate,
-        endDate: endDate,
+        userId: "0f37ee8e-7ffd-45d9-98aa-acf7200034e1",
+        startDate: "2023-02-04",
+        endDate: "2023-02-05",
         toWebhook: false,
     }
-    
-    terra
+    try {
+        terra
         .getActivity(data)
-        .then((res) => {
-        if(res.status == "success") {
-            console.log(res.data.calories_data)
-            res.status(200).json({ data: res.data.calories_data })
-        }
-        else {
-            console.log(res.status);
-            return res.status().json({ message: 'Something went wrong.'})
-        }
-      })
+        .then((response) => {
+            if(response.status == "success") {
+                console.log(response.data)
+                return res.status(201).json("Successfully retrieved activity data.");
+            }
+            else {
+                console.log(response.status)
+            }
+        })
 
+    } catch (error) {
+        res.status(409).json({message: error.message});
+    }
 }

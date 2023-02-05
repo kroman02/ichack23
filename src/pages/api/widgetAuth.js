@@ -20,20 +20,22 @@ export default function generateWidgetAuth(req, res) {
       ],
       showDisconnect: true,
       language: "EN",
-      authSuccessRedirectUrl: "", // homepage
-      authFailureRedirectUrl: "" // current page
+      authSuccessRedirectUrl: "/", // homepage
+      authFailureRedirectUrl: "/login" // current page
     };
 
     terra
         .generateWidgetSession(data)
-        .then((res) => {
-            if(res.status == "success") {
-                console.log(res.url);
-                return res.status(200).json({ data: res.url })
-            } else {
-                console.log(res.status);
-                return res.status().json({ message: 'Failure getting widget session' })
-            }
-        });
+        .then((s) => {
+            // use the various response elements
+              if(s.status == "success") {
+                console.log(s.url);
+                // redirect the the provided url
+                window.location = s.url
+              }
+              else
+              console.log(s.status);
+          })
+        .catch((error) => console.log("error:", error))
 }
   

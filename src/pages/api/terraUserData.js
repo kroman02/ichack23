@@ -8,23 +8,26 @@ export default function getTerraUserData(req, res) {
     const terra = new Terra(process.env.DEV_ID, process.env.API_KEY);
 
     const data = {
-        userId: "4bb0f073-cba8-416a-8515-92c7103218b1",
-        apiKey: process.env.API_KEY,
-        devId: process.env.DEV_ID,
+        userId: req.body.userId,
         toWebhook: false,
     }
-    
-    terra
-        .getUser(data)
-        .then((res) => {
-        if (res.status == "success") {
-            console.log(res.data)
-            res.status(200).json({ data: res.data })
-        }
-        else {
-            console.log(res.status);
-            res.status().json({ message: 'Something went wrong.'})
-        }
-      })
+
+    try {
+        terra
+        .getAthlete(data)
+        .then((response) => {
+            if(response.status == "success") {
+                console.log(response.data)
+                return res.status(201).json("Successfully retrieved athlete data.");
+            }
+            else {
+                console.log(response.status)
+            }
+        })
+        //res.status(201).json("Successfully retrieved athlete data.");
+
+    } catch (error) {
+        return res.status(409).json({message: error.message});
+    }
 
 }
