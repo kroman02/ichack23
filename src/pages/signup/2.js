@@ -2,10 +2,11 @@ import Btn from "components/form/btn";
 import Checkboxes from "components/form/checkboxes";
 import Steps from "components/form/stepBtn";
 import Logo from "components/logo";
-import { useState } from "react";
+import Link from "next/link"
+import { useState, useEffect } from "react";
 
 export default function Two() {
-  const [diets, setDiets] = useState([]);
+  const [diets, setDiets] = useState(typeof window == 'undefined' ? [] :localStorage.getItem('diet_req') || []);
   const onchange = (e) => {
     let id = e.target.getAttribute("id");
     if (!diets.includes(id)) {
@@ -14,6 +15,9 @@ export default function Two() {
       setDiets(diets.filter((e) => e != id));
     }
   };
+  useEffect(()=>{
+    localStorage.setItem('diet_req', diets)
+  }, [diets])
   return (
     <div className="bg-bblue w-screen min-h-screen flex justify-center">
       <div className="max-w-[500px]">
@@ -71,7 +75,7 @@ export default function Two() {
               ]}
             />
             <div className="mt-5">
-              <Btn text="Next" />
+              <Link href="3"><Btn text="Next" /></Link>
             </div>
           </div>
         </div>

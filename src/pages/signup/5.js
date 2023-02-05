@@ -3,18 +3,32 @@ import Input from "components/form/input";
 import Steps from "components/form/stepBtn";
 import Logo from "components/logo";
 import { useState } from "react";
+// import { middleware } from '../middleware.js'
 
 export default function Four() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const changeUsername = (e) => {
-    setUsername(e.target.value);
-  };
-  const changePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const onSubmit = () => {
-    console.log("do something");
+
+  // middleware()
+
+const [form, setForm] = useState({
+  email: "",
+  password: ""
+})
+  
+  
+
+  const handleChange = (e) => {
+    const {name, value} = e.target
+    setForm(oldForm => {
+      return {...oldForm, [name]: value}
+    })
+  }
+  console.log(form)
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+
+    
   };
   return (
     <div className="bg-bblue w-screen min-h-screen flex justify-center">
@@ -26,24 +40,24 @@ export default function Four() {
         <div className="h-[60vh] flex items-center justify-center">
           <div className="px-2 py-8 rounded-md bg-bcream m-3 mt-5 min-h-[20rem] flex flex-col items-center">
             <div className="mt-5 mx-5">
-              <Input
+              <input
                 name="email"
                 title="email"
-                onchange={changeUsername}
-                value={username}
+                onChange={handleChange}
+                value={form.email}
               />
             </div>
             <div className="mt-8 mx-5">
-              <Input
+              <input
                 name="password"
                 title="password"
-                onchange={changePassword}
+                onChange={handleChange}
                 type="password"
-                value={password}
+                value={form.password}
               />
             </div>
             <div className="mt-10">
-              <Btn text="Submit" onclick={onSubmit} />
+              <Btn text="Submit" onclick={'onSubmit'} />
             </div>
           </div>
         </div>
