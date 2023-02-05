@@ -14,7 +14,11 @@ module.exports = {
       borange: "#FB8500",
       blblue: "#0c4866",
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        brand: ["Averia Serif Libre", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

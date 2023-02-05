@@ -1,9 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
 import Header from "components/header";
-import Checkbox from "components/form/checkbox";
+import Rectangle from "components/Rectangle";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +16,15 @@ export default function Home() {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,700;1,400&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <main className="bg-bcream min-w-screen min-h-screen">
         <Header />
-       
+        <p className="text-bblue">Hello World</p>{" "}
+        <Rectangle />
       </main>
     </>
   );
