@@ -12,6 +12,7 @@ module.exports = {
       bcream: "#FFF7ED",
       bblue: "#023047",
       borange: "#FB8500",
+      blblue: "#0c4866",
     },
     extend: {},
   },
