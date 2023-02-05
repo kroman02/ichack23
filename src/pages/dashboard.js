@@ -149,7 +149,7 @@ export default function Dashboard() {
                   {recipe.meal == opened && (
                     <div>
                       {recipe.meals.map((r) => (
-                        <Link href={"/recipe/" + r.id}>
+                        <Link href={"/recipes/" + r.id}>
                           <div
                             key={recipe.meal + r.id}
                             className="flex flex-center w-full my-3"

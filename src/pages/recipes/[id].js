@@ -7,100 +7,7 @@ import Image from "next/image";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-export default function Dashboard() {
-  const user = { name: "Amy", activity: "High" };
-  const recipes = [
-    {
-      meal: "Breakfast",
-      meals: [
-        {
-          name: "recipe 1",
-          img: "https://images.ctfassets.net/uexfe9h31g3m/2KCndWTFaUAUcs0Aw6uCOa/b0360164a6b064f6a5fc5dfd3cbafae1/Quorn-sweeat-and-sour-1024_768__1_.jpg?w=768&h=512&fm=jpg&fit=thumb&q=90&fl=progressive",
-          id: 1,
-          ingredient_num: 2,
-          time: "30",
-        },
-        {
-          name: "recipe 1",
-          img: "https://images.ctfassets.net/uexfe9h31g3m/2KCndWTFaUAUcs0Aw6uCOa/b0360164a6b064f6a5fc5dfd3cbafae1/Quorn-sweeat-and-sour-1024_768__1_.jpg?w=768&h=512&fm=jpg&fit=thumb&q=90&fl=progressive",
-          id: 2,
-          ingredient_num: 2,
-          time: "30",
-        },
-      ],
-    },
-    {
-      meal: "Lunch",
-      meals: [
-        {
-          name: "recipe 1",
-          img: "https://images.ctfassets.net/uexfe9h31g3m/2KCndWTFaUAUcs0Aw6uCOa/b0360164a6b064f6a5fc5dfd3cbafae1/Quorn-sweeat-and-sour-1024_768__1_.jpg?w=768&h=512&fm=jpg&fit=thumb&q=90&fl=progressive",
-          id: 3,
-          ingredient_num: 2,
-          time: "30",
-        },
-        {
-          name: "recipe 1",
-          img: "https://images.ctfassets.net/uexfe9h31g3m/2KCndWTFaUAUcs0Aw6uCOa/b0360164a6b064f6a5fc5dfd3cbafae1/Quorn-sweeat-and-sour-1024_768__1_.jpg?w=768&h=512&fm=jpg&fit=thumb&q=90&fl=progressive",
-          id: 4,
-          ingredient_num: 2,
-          time: "30",
-        },
-      ],
-    },
-    {
-      meal: "Dinner",
-      meals: [
-        {
-          name: "recipe 1",
-          img: "https://images.ctfassets.net/uexfe9h31g3m/2KCndWTFaUAUcs0Aw6uCOa/b0360164a6b064f6a5fc5dfd3cbafae1/Quorn-sweeat-and-sour-1024_768__1_.jpg?w=768&h=512&fm=jpg&fit=thumb&q=90&fl=progressive",
-          id: 5,
-          ingredient_num: 2,
-          time: "30",
-        },
-        {
-          name: "recipe 1",
-          img: "https://images.ctfassets.net/uexfe9h31g3m/2KCndWTFaUAUcs0Aw6uCOa/b0360164a6b064f6a5fc5dfd3cbafae1/Quorn-sweeat-and-sour-1024_768__1_.jpg?w=768&h=512&fm=jpg&fit=thumb&q=90&fl=progressive",
-          id: 6,
-          ingredient_num: 2,
-          time: "30",
-        },
-      ],
-    },
-    {
-      meal: "Snacks",
-      meals: [
-        {
-          name: "recipe 1",
-          img: "https://images.ctfassets.net/uexfe9h31g3m/2KCndWTFaUAUcs0Aw6uCOa/b0360164a6b064f6a5fc5dfd3cbafae1/Quorn-sweeat-and-sour-1024_768__1_.jpg?w=768&h=512&fm=jpg&fit=thumb&q=90&fl=progressive",
-          id: 7,
-          ingredient_num: 2,
-          time: "30",
-        },
-        {
-          name: "recipe 1",
-          img: "https://images.ctfassets.net/uexfe9h31g3m/2KCndWTFaUAUcs0Aw6uCOa/b0360164a6b064f6a5fc5dfd3cbafae1/Quorn-sweeat-and-sour-1024_768__1_.jpg?w=768&h=512&fm=jpg&fit=thumb&q=90&fl=progressive",
-          id: 8,
-          ingredient_num: 2,
-          time: "30",
-        },
-      ],
-    },
-  ];
-
-  let activityColor = "text-green-600";
-  if (user.activity == "High" || user.activity == "Low") {
-    activityColor = "text-red-600";
-  }
-  if (user.activity == "Below Average" || user.activity == "Above Average") {
-    activityColor = "text-yellow-600";
-  }
-  const currentHour = new Date().getHours();
-
-  let [opened, setOpened] = useState(
-    currentHour < 11 ? "Breakfast" : currentHour < 16 ? "Lunch" : "Dinner"
-  );
-
+export default function recipe({ props }) {
   return (
     <div className="bg-bcream w-screen min-h-screen flex justify-center">
       <div className="max-w-[500px]">
@@ -186,3 +93,9 @@ export default function Dashboard() {
     </div>
   );
 }
+
+export async function getStaticProps(context) {
+    return {
+      props: {}, // will be passed to the page component as props
+    }
+  }
