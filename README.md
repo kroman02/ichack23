@@ -54,3 +54,6 @@ To get a local copy up and running follow these simple example steps.
    ```js
    npm run dev
    ```
+## Design Mock Up
+
+[Check out our Mock Up of the App on Figma](https://www.figma.com/file/KdrknPh0BjcPGJco75riRr/Amealio?node-id=3%3A11&t=8wbPyPI9PXtCqoN0-1)
