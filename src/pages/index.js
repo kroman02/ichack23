@@ -4,12 +4,21 @@ import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import jwt from 'jsonwebtoken'
+import { NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
+import { middleware } from './middleware.js'
+
+
 
 // const inter = Inter({ subsets: ['latin'] })
 
 
+
+
 export default function Home() {
 
+  // middleware()
+  
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('You are not logged in')
@@ -51,6 +60,11 @@ export default function Home() {
   );
 
   async function submitForm() {
+
+    // const { globalState, setGlobalState} = React.useContext(GlobalContext);
+    // const { url } = globalState;
+  
+
     const res = await fetch('/api/login', {
       method: "POST",
       headers: {
@@ -60,11 +74,23 @@ export default function Home() {
     }).then((t) => t.json())
 
     const token = res.token
-    console.log(token)
+    // console.log(token)
     const json = jwt.decode(token)
+    console.log(token)
     console.log(json)
   
-    if(json.user) {
+    if(json.username) {
+
+      console.log('here now')
+      const string_token = JSON.stringify({ token })
+      const json_token = JSON.stringify({ token })
+      
+      console.log(json)
+      console.log(token)
+      console.log(string_token)
+      console.log(json_token)
+
+      setMessage(`Welcome ${json.username}`)
 
       const res = await fetch('/api/secret', {
         method: "POST",
@@ -75,9 +101,15 @@ export default function Home() {
       }).then((t) => t.json())
 
 
-      const json = jwt.decode(token)
-      console.log(token)
       setSecret(res.secretAdminCode)
+
+      await window.localStorage.setItem("token", token);
+      // await localStorage.setItem("token", JSON.stringify(state));
+      // setGlobalState({
+      //   ...globalState,
+      //   token: token,
+      // })
+      // NextResponse.redirect(new URL('api/hello', request.url))
     } else {
       setSecret('Nothing Avaliable')
     }
