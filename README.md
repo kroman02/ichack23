@@ -3,6 +3,8 @@
 
 **Description:** This is an automatic meal prep app that does all the complicated calculations in the backend to determine a users ideal daily calories to lose, gain or maintain healthly weight. It uses the [Terra's Api](https://tryterra.co/) to connect to a users fitness wearables and uses [edamam api](edamam.com) for meal suggestions.
 
+**Inspiration:** Although they are a lot of different meal prep apps, such as myFitnessPal or Simple. The issue with this is that there is so much complicated information to add like macros, calories and lots tracking. It can be very stressful, timeconsuming and potentially harmful to individuals, espespcially ones that may be prone to eating disorders. aMeal.io, takes care of all the complications and just gives you easy to follow recipes to ensure you are reaching a healthy weight.
+
 **Category:** Automatic Meal prep
 
 **Project Owners:** kroman02
