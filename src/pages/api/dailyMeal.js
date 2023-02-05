@@ -13,6 +13,7 @@ const activityLevelNumbers = {
 
 export default async function handler(req, res) {
     /* data from request body to be confirmed */
+    const name = req.body.first_name
     const age = req.body.age
     const sex = req.body.sex
     const weight = req.body.weight_kg
@@ -36,7 +37,12 @@ export default async function handler(req, res) {
     recipes.push({meal: "dinner", meals: [await getRecipes(searchTerms, "Dinner", calories)]})
     recipes.push({meal: "snacks", meals: [await getRecipes(searchTerms, "Snacks", calories)]})
 
-    res.status(200).json({ recipe: recipes })
+    res.status(200).json({ 
+      recipe: recipes,
+      snacks: 2,
+      activity: 'average',
+      name: name
+     })
   }
 
 
