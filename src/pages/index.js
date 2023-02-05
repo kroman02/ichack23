@@ -1,21 +1,14 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import jwt from 'jsonwebtoken'
-import { NextResponse } from 'next/server'
-import { NextRequest } from 'next/server'
-import { middleware } from './middleware.js'
 
 // const inter = Inter({ subsets: ['latin'] })
 import Head from "next/head";
 import Logo from "components/logo";
 import Rectangle from "components/rectangle";
+import { middleware } from './middleware.js'
 
 export default function Home() {
-
-  // middleware()
+  middleware()
   
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -47,38 +40,7 @@ export default function Home() {
           </h2>
         </div>
         <Rectangle />
-      <div>
-        <form method="POST" action="/api/login">
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <br />
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <input type="button" value="Login" onClick={submitForm}/>
-        </form>
-      </div>
     </main>
-    <main className="bg-bcream max-w-screen min-h-screen">
-        <div className="absolute w-full items-center flex flex-col top-[20%] md:top-[10%]">
-          <Logo styleComp="w-32 h-32 text-borange md:w-52 md:h-52" />
-          <h1 className="text-bblue font-brand text-center w-full text-[60px] -mt-10 md:text-[80px]">
-            aMeal.io
-          </h1>
-          <h2 className="text-bblue font-brand text-[20px] w-4/6 md:text-[40px] text-center">
-            Recipe Inspiration
-          </h2>
-        </div>
-        <Rectangle />
-      </main>
     </>
   );
 
@@ -93,42 +55,12 @@ export default function Home() {
     }).then((t) => t.json())
 
     const token = res.token
-    // console.log(token)
     const json = jwt.decode(token)
-    console.log(token)
-    console.log(json)
   
     if(json.username) {
 
-      console.log('here now')
-      const string_token = JSON.stringify({ token })
-      const json_token = JSON.stringify({ token })
-      
-      console.log(json)
-      console.log(token)
-      console.log(string_token)
-      console.log(json_token)
-
-      setMessage(`Welcome ${json.username}`)
-
-      const res = await fetch('/api/secret', {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ token })
-      }).then((t) => t.json())
-
-
-      setSecret(res.secretAdminCode)
 
       await window.localStorage.setItem("token", token);
-      // await localStorage.setItem("token", JSON.stringify(state));
-      // setGlobalState({
-      //   ...globalState,
-      //   token: token,
-      // })
-      // NextResponse.redirect(new URL('api/hello', request.url))
     } else {
       setSecret('Nothing Avaliable')
     }
