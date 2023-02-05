@@ -1,38 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# aMeal.io &nbsp;&nbsp; ![image](https://img.shields.io/badge/DRAFT-FFA500?style=for-the-badge&logoColor=white)
+## Main Info
+
+**Description:** This is an automatic meal prep app that does all the complicated calculations in the backend to determine a users ideal daily calories to lose, gain or maintain healthly weight. It uses the [Terra's Api](https://tryterra.co/) to connect to a users fitness wearables and uses [edamam api](edamam.com) for meal suggestions.
+
+**Category:** Automatic Meal prep
+
+**Project Owners:** kroman02
+
+**Contributors:** amyfranz, JulieVand, tariqpathan, olseda20, bruna-isabel
+
+**Competition Categories:** Terra, Tech for All
+
+**Last Updated:** Sun Feb 05 2023
+
+## Stack
+![image](https:&#x2F;&#x2F;img.shields.io&#x2F;badge&#x2F;next.js-000000?style&#x3D;for-the-badge&amp;logo&#x3D;nextdotjs&amp;logoColor&#x3D;white) ![image](https:&#x2F;&#x2F;img.shields.io&#x2F;badge&#x2F;Node.js-339933?style&#x3D;for-the-badge&amp;logo&#x3D;nodedotjs&amp;logoColor&#x3D;white) ![image](https:&#x2F;&#x2F;img.shields.io&#x2F;badge&#x2F;Tailwind_CSS-38B2AC?style&#x3D;for-the-badge&amp;logo&#x3D;tailwind-css&amp;logoColor&#x3D;white)  ![image](https:&#x2F;&#x2F;img.shields.io&#x2F;badge&#x2F;JavaScript-323330?style&#x3D;for-the-badge&amp;logo&#x3D;javascript&amp;logoColor&#x3D;F7DF1E) 
+
+   
+## Project Outcomes
+
+* Calculate a users average calories
+* Determine how active a user is on a day
+* Suggest meals within a calorie range to help an individual get to a healthy weight
+
+## Next Steps
+### Short Term
+* Determine a better approach to calculate daily calories
+* Add a meal search and recipe display depending on the suggested calorie range
+* Get more personalised data from a user such as menstration cycle to determine a more personalised recommendations
+* Connect to terra's live data to get an up to date activity data 
+* Turn the website into an app to notify the user they should have a snack if they have been more active
+* Use Teras webhooks or create an wearables app to notify the user via their weariables if they should have something more to eat
+
+### Long Term
+* Become a fully integerated app for users to input their shopping recipts etc. to suggest recipes on their current food
+
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running follow these simple example steps.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Installation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone the repo
+   ```sh
+   git clone www.github.com&#x2F;kroman02&#x2F;ichack23
+   ```
+2. Install NPM packages
+   ```sh
+   npm i
+   ```
+4. RUN the program
+   ```js
+   npm run dev
+   ```
