@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     const searchTerms = req.body.searchTerms
     const encodedSearch = encodeURIComponent(searchTerms)
     const meal_type = req.body.meal_type
-    let calories = calculateCalories(age, sex, weight, height, activityMultiplier)
+    let calories = calculateCalories(age, sex, weight, height, activityMultiplier) * 0.33
     if (!calories) {calories = 600}
     const healthConditions = req.body.healthConditions
     const cuisineType = req.body.cuisineType    
