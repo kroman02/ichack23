@@ -1,7 +1,6 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
-import Header from "components/header";
-import Rectangle from "components/Rectangle";
+import Logo from "components/logo";
+import Rectangle from "components/rectangle";
 
 export default function Home() {
   return (
@@ -14,14 +13,17 @@ export default function Home() {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,700;1,400&display=swap"
-          rel="stylesheet"
-        />
       </Head>
-      <main className="bg-bcream min-w-screen min-h-screen">
-        <Header />
-        <p className="text-bblue">Hello World</p>{" "}
+      <main className="bg-bcream max-w-screen min-h-screen">
+        <div className="absolute w-full items-center flex flex-col top-[20%] md:top-[10%]">
+          <Logo styleComp="w-32 h-32 text-borange md:w-52 md:h-52" />
+          <h1 className="text-bblue font-brand text-center w-full text-[60px] -mt-10 md:text-[80px]">
+            aMeal.io
+          </h1>
+          <h2 className="text-bblue font-brand text-[20px] w-4/6 md:text-[40px] text-center">
+            Recipe Inspiration
+          </h2>
+        </div>
         <Rectangle />
       </main>
     </>

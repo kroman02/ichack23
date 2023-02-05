@@ -1,4 +1,4 @@
-import Checkbox from "./form/checkbox";
+import Checkbox from "./checkbox";
 
 export default function Checkboxes({
   title = "",
@@ -9,8 +9,8 @@ export default function Checkboxes({
 }) {
   return (
     <fieldset id={name}>
-      <legend className="text-lg font-medium text-gray-900">{title}</legend>
-      <div className="mt-4 divide-y divide-gray-200 border-t border-b border-gray-200">
+      <legend className="text-lg font-medium text-bblue">{title}</legend>
+      <div className="mt-4 divide-y divide-blblue border-t border-b border-blblue">
         {checkboxes.map((checkbox) => (
           <>
             <Checkbox
