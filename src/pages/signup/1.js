@@ -1,8 +1,12 @@
 import Btn from "components/form/btn";
 import Steps from "components/form/stepBtn";
 import Logo from "components/logo";
+import { middleware } from '../middleware.js'
+
 
 export default function One() {
+  middleware()
+
   return (
     <div className="bg-bblue w-screen min-h-screen flex justify-center">
       <div className="max-w-[500px]">
@@ -20,7 +24,7 @@ export default function One() {
           </div>
         </div>
         <div className="absolute bottom-4 md:bottom-[15%] w-screen right-0">
-          <Steps step={1} />
+          <Steps currentStep={1} />
         </div>
       </div>
     </div>
