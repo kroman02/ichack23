@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     /* data from request body to be confirmed */
     const age = req.body.age
     const sex = req.body.sex
-    const weight = Math.random()*100
+    const weight = req.body.weight_kg
     const height = req.body.height_m
     let activityLevel = req.body.activityLevel
     if (!activityLevel) {activityLevel = "average"}
@@ -26,19 +26,23 @@ export default async function handler(req, res) {
       searchTerms = encodeURIComponent(req.body.searchTerms)
     }
 
-    const meal_type = req.body.meal_type
-    let calories = calculateCalories(age, sex, weight, height, activityMultiplier) * 0.33
+    let calories = calculateCalories(age, sex, weight, height, activityMultiplier) * 0.2
     if (!calories) {calories = 600}
-    const healthConditions = req.body.healthConditions ? req.body.healthConditions : ""
-    const cuisineType = req.body.cuisineType ? req.body.cuisineType : ""
-    const recipes = await getRecipes(searchTerms, meal_type, calories, healthConditions, cuisineType)
+    const healthConditions = req.body.healthConditions
+    const cuisineType = req.body.cuisineType
+    const recipes = []
+    recipes.push({breakfast: await getRecipes(searchTerms, "Breakfast", calories)})
+    recipes.push({lunch: await getRecipes(searchTerms, "Lunch", calories)})
+    recipes.push({dinner: await getRecipes(searchTerms, "Dinner", calories)})
+    recipes.push({snacks: await getRecipes(searchTerms, "Snacks", calories)})
+
     res.status(200).json({ recipe: recipes })
   }
 
 
 
-async function getRecipes(searchTerms, mealType, calories, healthConditions, cuisineType) {
-/*returns an array of 10 recipes */
+async function getRecipes(searchTerms, mealType, calories) {
+/*returns an array of two recipes */
 let minCalories = 0
 if (calories - 50 > 0) {
   minCalories = calories - 50
@@ -46,20 +50,12 @@ if (calories - 50 > 0) {
 const maxCalories = calories + 50
 const rangeCalories = minCalories.toString() + "-" + maxCalories.toString()
 if (!mealType) { 
-    mealType="any" }
+    mealType="Breakfast" }
   console.log(`Search Params: ${mealType}, ${rangeCalories}, ${searchTerms}`)
-  let reqURL = `https://api.edamam.com/api/recipes/v2?type=public&q=${searchTerms}&app_id=${APP_ID}&app_key=${APP_KEY}&meal_type=${mealType}&calories=${rangeCalories}`
-  if (healthConditions) {
-    reqURL += `&health=${healthConditions}&random=true`
-  }
-
-  if (cuisineType) {
-    reqURL += `&cuisineType=${cuisineType}`
-  }
+  const reqURL = `https://api.edamam.com/api/recipes/v2?type=public&q=${searchTerms}&app_id=${APP_ID}&app_key=${APP_KEY}&meal_type=${mealType}&calories=${rangeCalories}&random=true`
     let res = await fetch(reqURL)
     res = await res.json()
-    const shuffled = res.hits.sort(() => 0.5 - Math.random())
-    const slicedRecipes = shuffled.slice(0, 6)
+    const slicedRecipes = res.hits.slice(0, 2)
     const recipes = []
     slicedRecipes.forEach((element, index) => {
       recipes.push({
