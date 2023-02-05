@@ -11,7 +11,7 @@ export default function Home() {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [message, setMessage] = useState('You are not logged in')
+  const [message, setMessage] = useState('')
   const [secret, setSecret] = useState('')
 
   return (
