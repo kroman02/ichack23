@@ -20,7 +20,7 @@ export default function One() {
           </div>
         </div>
         <div className="absolute bottom-4 md:bottom-[15%] w-screen right-0">
-          <Steps step={1} />
+          <Steps currentStep={1} />
         </div>
       </div>
     </div>
