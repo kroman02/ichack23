@@ -26,8 +26,23 @@ export default function recipe({ props }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(props) {
+  let data = await fetch(
+    `https://api.edamam.com/api/recipes/v2/${props.query.id}?type=public&app_id=04df2c97&app_key=2e4f17903e0ba50f0592b9948a93b35e&random=true`
+  );
+  data = await data.json();
   return {
-    props: {}, // will be passed to the page component as props
+    props: {
+      name: data.recipe.label,
+      ingredients: data.recipe.ingredientLines,
+      calories: data.recipe.calories,
+      protein: data.recipe.totalNutrients.PROCNT.quantity,
+      carbs: data.recipe.totalNutrients.CHOCDF.quantity,
+      fat: data.recipe.totalNutrients.FAT.quantity,
+      ingrdient_num: data.recipe.ingredients.length,
+      img: data.recipe.image,
+      time: data.recipe.totalTime,
+      url: data.recipe.url,
+    },
   };
 }
